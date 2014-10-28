@@ -24,42 +24,29 @@ public class EmployeeDAO implements Serializable {
     public EmployeeDAO() {
     }
     
-    private EntityManager getEm() {
-//    	InitialContext ic;
-//		try {
-////			ic = new InitialContext();
-////			EntityManager em =(EntityManager) ic.lookup("java:comp/env/persistence/em");
-////			System.out.println(("*********Entity Manager retrievied***********"));
-//			return em;
-//		} catch (NamingException e) {
-//			System.out.println(("*********Entity Manager not found***********"));
-//			e.printStackTrace();
-//		}
-    	return em;
-    }
 
 	public List<Employee> getAll() {
-		return getEm().createNamedQuery("Employee.findAllDatas",Employee.class).getResultList();
+		return em.createNamedQuery("Employee.findAllDatas",Employee.class).getResultList();
 	}
 	
 	public Employee get(Long id) {
 		System.out.println(("*********start dao.get***********"));
 		if (id==null) return null;
-		if (getEm()==null) {
+		if (em==null) {
 			System.out.println(("*********em is NULL***********"));
 			return null;
 		}
 		System.out.println(("*********em is NOT NULL***********")); 
-		System.out.println(("********* isOpen:" + getEm().isOpen() + "***********"));
-		Employee e = getEm().find(Employee.class, id);
+		System.out.println(("********* isOpen:" + em.isOpen() + "***********"));
+		Employee e = em.find(Employee.class, id);
 		System.out.println(("*********employee is "+ e + "***********"));
-		getEm().detach(e);
+		em.detach(e);
 		return e;
 	}
 
 	public void save(Employee e) {
 		if (e==null) return;
-		getEm().merge(e);
+		em.merge(e);
 	}
 
 }
