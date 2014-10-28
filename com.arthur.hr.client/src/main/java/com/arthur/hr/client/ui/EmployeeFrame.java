@@ -1,20 +1,26 @@
 package com.arthur.hr.client.ui;
 
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Properties;
 
+import javax.ejb.EJB;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.EmptyBorder;
+
+import mybeans.interfaces.EmployeeDAORemote;
+import entities.Employee;
 
 public class EmployeeFrame extends JFrame {
 
@@ -22,6 +28,10 @@ public class EmployeeFrame extends JFrame {
 	private JPanel contentPane;
 	private JLabel lblStatus;
 	private JTextField txtEmployeedaomybeans;
+	private JTextField textField;
+	
+	@EJB
+	EmployeeDAORemote dao;
 
 	/**
 	 * Create the frame.
@@ -36,7 +46,6 @@ public class EmployeeFrame extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JButton btnTestConnection = new JButton("Test Connection");
 		btnTestConnection.addActionListener(new ActionListener() {
@@ -45,37 +54,120 @@ public class EmployeeFrame extends JFrame {
 				testConnectionActionPerformed();
 			}
 		});
-		contentPane.add(btnTestConnection);
 		
-		txtEmployeedaomybeans = new JTextField();
-		txtEmployeedaomybeans.setText("EmployeeDAO#mybeans");
-		contentPane.add(txtEmployeedaomybeans);
+		txtEmployeedaomybeans = new JTextField(); 
+		txtEmployeedaomybeans.setText("java:global.com.arthur.hr.ear.ejb-0.0.1-SNAPSHOT.EmployeeDAO");
 		txtEmployeedaomybeans.setColumns(10);
 		
 		lblStatus = new JLabel("waiting for test");
-		contentPane.add(lblStatus);
+		
+		JButton btnRetrieveEmployeeFirstname = new JButton("Retrieve Employee Firstname");
+		btnRetrieveEmployeeFirstname.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				retrieveEmployeeFirstnameActionPerformed();
+			}
+		});
+		
+		
+		textField = new JTextField();
+		textField.setText("100");
+		textField.setColumns(10);
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnRetrieveEmployeeFirstname)
+								.addComponent(btnTestConnection))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(txtEmployeedaomybeans, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
+								.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(139)
+							.addComponent(lblStatus)))
+					.addContainerGap(95, Short.MAX_VALUE))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(9)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnTestConnection)
+						.addComponent(txtEmployeedaomybeans, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnRetrieveEmployeeFirstname)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(63)
+					.addComponent(lblStatus)
+					.addContainerGap(101, Short.MAX_VALUE))
+		);
+		contentPane.setLayout(gl_contentPane);
+	}
+	
+	public void retrieveEmployeeFirstnameActionPerformed() {
+		String status = "";
+		EmployeeDAORemote dao;
+		try {
+			dao = (EmployeeDAORemote) getContext().lookup(txtEmployeedaomybeans.getText());
+			Employee e = dao.get(Long.parseLong(textField.getText()));
+			status = e.getFirstname();
+			closeContext();
+		} catch (NamingException e1) {
+			status = "Erreur lookup";
+			e1.printStackTrace();
+		} catch (Exception e) {
+			status = "Erreur";
+			e.printStackTrace();
+		}
+		lblStatus.setText(status);
 	}
 	
 	public void testConnectionActionPerformed() {
-		Properties p = new Properties();
-		p.put("java.naming.factory.initial", "weblogic.jndi.WLInitialContextFactory");
-		p.put("java.naming.provider.url", "t3://localhost:7001");
-		p.put("java.naming.security.principal", "admin");
-		p.put("java.naming.security.credentials", "pwd4admin");
-		Context ctx=null;
-		try {
-			ctx = new InitialContext(p);
-			ctx.lookup(txtEmployeedaomybeans.getText());
-			lblStatus.setText("ok");
-		} catch (NamingException e) {
-			e.printStackTrace();
-			lblStatus.setText("Error : " + e.getMessage());
-		} finally {
+		String status = "";
+		if (getContext()!=null) {
+			status = "context ok";
 			try {
-				if (ctx!=null) ctx.close();
-			} catch (Exception e) {
-				lblStatus.setText(lblStatus.getText() + " - Error : " + e.getMessage());
+				Object o = getContext().lookup(txtEmployeedaomybeans.getText());
+				status += " : " + o.getClass();
+				closeContext();
+			} catch (NamingException e) {
+				status += " - lookup ko";
+				e.printStackTrace();
 			}
+		}
+		lblStatus.setText(status);
+	}
+	
+	private Context ctx;
+	private Context getContext() {
+		if (ctx==null) {
+			Properties p = new Properties();
+			p.put("java.naming.factory.initial", "weblogic.jndi.WLInitialContextFactory");
+			p.put("java.naming.provider.url", "t3://localhost:7001");
+			p.put("java.naming.security.principal", "admin");
+			p.put("java.naming.security.credentials", "pwd4admin");
+			try {
+				ctx = new InitialContext(p);
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
+		}
+		return ctx;
+	}
+	private void closeContext() {
+		if (ctx!=null) {
+			try {
+				ctx.close();
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
+			ctx=null;
 		}
 	}
 	
