@@ -8,6 +8,8 @@
 		<jta-data-source>hrdatasource</jta-data-source>
 		<class>entities.Employee</class>
 		<class>entities.Job</class>
+		<class>entities.JobHistory</class>
+		<class>entities.JobHistoryPK</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />
 			<property name="hibernate.show_sql" value="true" />

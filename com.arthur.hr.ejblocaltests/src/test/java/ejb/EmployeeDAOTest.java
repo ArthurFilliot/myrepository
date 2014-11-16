@@ -19,30 +19,31 @@ import entities.Employee;
 
 public class EmployeeDAOTest {
 
-//	private static EJBContainer ejbContainer;
-    private static Context ctx;
-    private static EmployeeDAORemote employeeDAO;
-    
+	private static Context ctx;
+	private static EmployeeDAORemote employeeDAO;
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		Properties p = new Properties();
-		p.put(Context.INITIAL_CONTEXT_FACTORY, "org.apache.openejb.core.LocalInitialContextFactory");
-//		p.put("hrdatasource", "new://Resource?type=DataSource");
-//		p.put("hrdatasource.JdbcDriver", "oracle.jdbc.OracleDriver");
-//		p.put("hrdatasource.JdbcUrl", "jdbc:oracle:thin:@127.0.0.1:1521:orcl");
-//		p.put("hrdatasource.UserName", "hr");
-//		p.put("hrdatasource.Password", "pwd4dba");
-//		p.put("hrdatasource.JtaManaged", "true");
+		p.put(Context.INITIAL_CONTEXT_FACTORY,
+				"org.apache.openejb.core.LocalInitialContextFactory");
+		// p.put("hrdatasource", "new://Resource?type=DataSource");
+		// p.put("hrdatasource.JdbcDriver", "oracle.jdbc.OracleDriver");
+		// p.put("hrdatasource.JdbcUrl",
+		// "jdbc:oracle:thin:@127.0.0.1:1521:orcl");
+		// p.put("hrdatasource.UserName", "hr");
+		// p.put("hrdatasource.Password", "pwd4dba");
+		// p.put("hrdatasource.JtaManaged", "true");
 
 		ctx = new InitialContext(p);
-		
-        employeeDAO = (EmployeeDAORemote)ctx.lookup("EmployeeDAO");
+
+		employeeDAO = (EmployeeDAORemote) ctx.lookup("EmployeeDAO");
 	}
 
 	@Test()
 	public void testGetAll() {
 		List<Employee> lst = employeeDAO.getAll();
-		assertTrue(lst.size()>0);
+		assertTrue(lst.size() > 0);
 	}
 	
 	@Test()
