@@ -9,15 +9,6 @@
 	http://www.springframework.org/schema/integration/stream 
 	http://www.springframework.org/schema/integration/stream/spring-integration-stream.xsd">
 	
-	<!-- message producer / a Spring Integration wrapped Java Standard input stream -->
-	<int-stream:stdin-channel-adapter id="producer"	channel="messageChannel">
-		<int:poller id="stdInPoller" max-messages-per-poll="5" fixed-rate="200" />
-	</int-stream:stdin-channel-adapter>
-	
-	<!-- a pair of message consumers / a pair of Spring Integration wrapped	Java Standard output streams -->
-	<int-stream:stdout-channel-adapter id="consumer1" channel="messageChannel" append-newline="true" />
-	<int-stream:stdout-channel-adapter id="consumer2" channel="messageChannel" append-newline="false" />
-	
 	<!-- a pub/sub message channel -->
 	<!-- <int:publish-subscribe-channel id="messageChannel" /> -->
 		
@@ -26,4 +17,13 @@
 	<int:channel id="messageChannel">
 		<int:queue capacity="2" />
 	</int:channel>
+	
+	<!-- message producer / a Spring Integration wrapped Java Standard input stream -->
+	<int-stream:stdin-channel-adapter id="producer"	channel="messageChannel">
+		<int:poller id="stdInPoller" max-messages-per-poll="5" fixed-rate="200" />
+	</int-stream:stdin-channel-adapter>
+	
+	<!-- a pair of message consumers / a pair of Spring Integration wrapped	Java Standard output streams -->
+	<int-stream:stdout-channel-adapter id="consumer1" channel="messageChannel" append-newline="true" />
+	<int-stream:stdout-channel-adapter id="consumer2" channel="messageChannel" append-newline="false" />
 </beans>

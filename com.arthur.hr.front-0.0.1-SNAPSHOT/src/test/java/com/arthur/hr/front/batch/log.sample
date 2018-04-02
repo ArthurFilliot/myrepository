@@ -1,0 +1,690 @@
+17:05:08.918 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.jdbc.datasource.init.DataSourceInitializer#0'
+17:05:08.918 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.jdbc.datasource.init.DataSourceInitializer#0' to allow for resolving potential circular references
+17:05:08.918 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'dataSource'
+17:05:08.934 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean '(inner bean)#31e5415e'
+17:05:08.934 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean '(inner bean)#a2431d0'
+17:05:08.934 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean '(inner bean)#702b8b12'
+17:05:08.965 [main] DEBUG org.springframework.beans.BeanUtils - No property editor [org.springframework.core.io.ResourceLoaderEditor] found for type org.springframework.core.io.ResourceLoader according to 'Editor' suffix convention
+17:05:08.965 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Invoking afterPropertiesSet() on bean with name '(inner bean)#702b8b12'
+17:05:08.965 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean '(inner bean)#702b8b12'
+17:05:08.965 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean '(inner bean)#a2431d0'
+17:05:08.965 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean '(inner bean)#759d26fb'
+17:05:08.965 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean '(inner bean)#3c73951'
+17:05:08.965 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Invoking afterPropertiesSet() on bean with name '(inner bean)#3c73951'
+17:05:08.965 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean '(inner bean)#3c73951'
+17:05:08.965 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean '(inner bean)#759d26fb'
+17:05:08.981 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean '(inner bean)#31e5415e'
+17:05:08.981 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean '(inner bean)#49c7b90e'
+17:05:08.981 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean '(inner bean)#49c7b90e'
+17:05:08.981 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Invoking afterPropertiesSet() on bean with name 'org.springframework.jdbc.datasource.init.DataSourceInitializer#0'
+17:05:08.981 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+17:05:08.981 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:oracle:thin:@//localhost:1521/ORCL]
+17:05:10.099 [main] INFO  o.s.jdbc.datasource.init.ScriptUtils - Executing SQL script from class path resource [org/springframework/batch/core/schema-drop-oracle10g.sql]
+17:05:10.299 [main] DEBUG o.s.jdbc.datasource.init.ScriptUtils - 0 returned as updateCount for SQL: DROP TABLE BATCH_STEP_EXECUTION_CONTEXT 
+17:05:10.352 [main] DEBUG o.s.jdbc.datasource.init.ScriptUtils - 0 returned as updateCount for SQL: DROP TABLE BATCH_JOB_EXECUTION_CONTEXT 
+17:05:10.437 [main] DEBUG o.s.jdbc.datasource.init.ScriptUtils - 0 returned as updateCount for SQL: DROP TABLE BATCH_STEP_EXECUTION 
+17:05:10.484 [main] DEBUG o.s.jdbc.datasource.init.ScriptUtils - 0 returned as updateCount for SQL: DROP TABLE BATCH_JOB_EXECUTION_PARAMS 
+17:05:10.553 [main] DEBUG o.s.jdbc.datasource.init.ScriptUtils - 0 returned as updateCount for SQL: DROP TABLE BATCH_JOB_EXECUTION 
+17:05:10.622 [main] DEBUG o.s.jdbc.datasource.init.ScriptUtils - 0 returned as updateCount for SQL: DROP TABLE BATCH_JOB_INSTANCE 
+17:05:10.637 [main] DEBUG o.s.jdbc.datasource.init.ScriptUtils - 0 returned as updateCount for SQL: DROP SEQUENCE BATCH_STEP_EXECUTION_SEQ 
+17:05:10.637 [main] DEBUG o.s.jdbc.datasource.init.ScriptUtils - 0 returned as updateCount for SQL: DROP SEQUENCE BATCH_JOB_EXECUTION_SEQ 
+17:05:10.653 [main] DEBUG o.s.jdbc.datasource.init.ScriptUtils - 0 returned as updateCount for SQL: DROP SEQUENCE BATCH_JOB_SEQ 
+17:05:10.653 [main] INFO  o.s.jdbc.datasource.init.ScriptUtils - Executed SQL script from class path resource [org/springframework/batch/core/schema-drop-oracle10g.sql] in 554 ms.
+17:05:10.653 [main] INFO  o.s.jdbc.datasource.init.ScriptUtils - Executing SQL script from class path resource [org/springframework/batch/core/schema-oracle10g.sql]
+17:05:10.700 [main] DEBUG o.s.jdbc.datasource.init.ScriptUtils - 0 returned as updateCount for SQL: CREATE TABLE BATCH_JOB_INSTANCE ( JOB_INSTANCE_ID NUMBER(19,0) NOT NULL PRIMARY KEY , VERSION NUMBER(19,0) , JOB_NAME VARCHAR2(100) NOT NULL, JOB_KEY VARCHAR2(32) NOT NULL, constraint JOB_INST_UN unique (JOB_NAME, JOB_KEY) ) 
+17:05:10.721 [main] DEBUG o.s.jdbc.datasource.init.ScriptUtils - 0 returned as updateCount for SQL: CREATE TABLE BATCH_JOB_EXECUTION ( JOB_EXECUTION_ID NUMBER(19,0) NOT NULL PRIMARY KEY , VERSION NUMBER(19,0) , JOB_INSTANCE_ID NUMBER(19,0) NOT NULL, CREATE_TIME TIMESTAMP NOT NULL, START_TIME TIMESTAMP DEFAULT NULL , END_TIME TIMESTAMP DEFAULT NULL , STATUS VARCHAR2(10) , EXIT_CODE VARCHAR2(100) , EXIT_MESSAGE VARCHAR2(2500) , LAST_UPDATED TIMESTAMP, constraint JOB_INST_EXEC_FK foreign key (JOB_INSTANCE_ID) references BATCH_JOB_INSTANCE(JOB_INSTANCE_ID) ) 
+17:05:10.737 [main] DEBUG o.s.jdbc.datasource.init.ScriptUtils - 0 returned as updateCount for SQL: CREATE TABLE BATCH_JOB_EXECUTION_PARAMS ( JOB_EXECUTION_ID NUMBER(19,0) NOT NULL , TYPE_CD VARCHAR2(6) NOT NULL , KEY_NAME VARCHAR2(100) NOT NULL , STRING_VAL VARCHAR2(250) , DATE_VAL TIMESTAMP DEFAULT NULL , LONG_VAL NUMBER(19,0) , DOUBLE_VAL NUMBER , IDENTIFYING CHAR(1) NOT NULL , constraint JOB_EXEC_PARAMS_FK foreign key (JOB_EXECUTION_ID) references BATCH_JOB_EXECUTION(JOB_EXECUTION_ID) ) 
+17:05:10.769 [main] DEBUG o.s.jdbc.datasource.init.ScriptUtils - 0 returned as updateCount for SQL: CREATE TABLE BATCH_STEP_EXECUTION ( STEP_EXECUTION_ID NUMBER(19,0) NOT NULL PRIMARY KEY , VERSION NUMBER(19,0) NOT NULL, STEP_NAME VARCHAR2(100) NOT NULL, JOB_EXECUTION_ID NUMBER(19,0) NOT NULL, START_TIME TIMESTAMP NOT NULL , END_TIME TIMESTAMP DEFAULT NULL , STATUS VARCHAR2(10) , COMMIT_COUNT NUMBER(19,0) , READ_COUNT NUMBER(19,0) , FILTER_COUNT NUMBER(19,0) , WRITE_COUNT NUMBER(19,0) , READ_SKIP_COUNT NUMBER(19,0) , WRITE_SKIP_COUNT NUMBER(19,0) , PROCESS_SKIP_COUNT NUMBER(19,0) , ROLLBACK_COUNT NUMBER(19,0) , EXIT_CODE VARCHAR2(100) , EXIT_MESSAGE VARCHAR2(2500) , LAST_UPDATED TIMESTAMP, constraint JOB_EXEC_STEP_FK foreign key (JOB_EXECUTION_ID) references BATCH_JOB_EXECUTION(JOB_EXECUTION_ID) ) 
+17:05:10.800 [main] DEBUG o.s.jdbc.datasource.init.ScriptUtils - 0 returned as updateCount for SQL: CREATE TABLE BATCH_STEP_EXECUTION_CONTEXT ( STEP_EXECUTION_ID NUMBER(19,0) NOT NULL PRIMARY KEY, SHORT_CONTEXT VARCHAR2(2500) NOT NULL, SERIALIZED_CONTEXT CLOB , constraint STEP_EXEC_CTX_FK foreign key (STEP_EXECUTION_ID) references BATCH_STEP_EXECUTION(STEP_EXECUTION_ID) ) 
+17:05:10.822 [main] DEBUG o.s.jdbc.datasource.init.ScriptUtils - 0 returned as updateCount for SQL: CREATE TABLE BATCH_JOB_EXECUTION_CONTEXT ( JOB_EXECUTION_ID NUMBER(19,0) NOT NULL PRIMARY KEY, SHORT_CONTEXT VARCHAR2(2500) NOT NULL, SERIALIZED_CONTEXT CLOB , constraint JOB_EXEC_CTX_FK foreign key (JOB_EXECUTION_ID) references BATCH_JOB_EXECUTION(JOB_EXECUTION_ID) ) 
+17:05:10.838 [main] DEBUG o.s.jdbc.datasource.init.ScriptUtils - 0 returned as updateCount for SQL: CREATE SEQUENCE BATCH_STEP_EXECUTION_SEQ START WITH 0 MINVALUE 0 MAXVALUE 9223372036854775807 NOCYCLE
+17:05:10.838 [main] DEBUG o.s.jdbc.datasource.init.ScriptUtils - 0 returned as updateCount for SQL: CREATE SEQUENCE BATCH_JOB_EXECUTION_SEQ START WITH 0 MINVALUE 0 MAXVALUE 9223372036854775807 NOCYCLE
+17:05:10.853 [main] DEBUG o.s.jdbc.datasource.init.ScriptUtils - 0 returned as updateCount for SQL: CREATE SEQUENCE BATCH_JOB_SEQ START WITH 0 MINVALUE 0 MAXVALUE 9223372036854775807 NOCYCLE
+17:05:10.853 [main] INFO  o.s.jdbc.datasource.init.ScriptUtils - Executed SQL script from class path resource [org/springframework/batch/core/schema-oracle10g.sql] in 200 ms.
+17:05:10.853 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+17:05:10.853 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.jdbc.datasource.init.DataSourceInitializer#0'
+17:05:10.853 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'employeeProcessor'
+17:05:10.853 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean 'employeeProcessor'
+17:05:10.853 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Eagerly caching bean 'employeeProcessor' to allow for resolving potential circular references
+17:05:10.853 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean 'employeeProcessor'
+17:05:10.853 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.batch.core.scope.internalStepScope'
+17:05:10.853 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.beans.factory.config.CustomEditorConfigurer'
+17:05:10.853 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.batch.core.configuration.xml.CoreNamespacePostProcessor'
+17:05:10.853 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'step1'
+17:05:10.853 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean 'step1'
+17:05:10.853 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Eagerly caching bean 'step1' to allow for resolving potential circular references
+17:05:10.869 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'employeeOracleItemReader'
+17:05:10.869 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean 'employeeOracleItemReader'
+17:05:10.869 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Eagerly caching bean 'employeeOracleItemReader' to allow for resolving potential circular references
+17:05:10.869 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'dataSource'
+17:05:10.884 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean 'com.arthur.hr.front.batch.employees.EmployeeDTOMapper#68ceda24'
+17:05:10.900 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean 'com.arthur.hr.front.batch.employees.EmployeeDTOMapper#68ceda24'
+17:05:10.900 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Invoking afterPropertiesSet() on bean with name 'employeeOracleItemReader'
+17:05:10.900 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean 'employeeOracleItemReader'
+17:05:10.900 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'employeeProcessor'
+17:05:10.900 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'employeeFlatFileItemWriter'
+17:05:10.900 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean 'employeeFlatFileItemWriter'
+17:05:10.900 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Eagerly caching bean 'employeeFlatFileItemWriter' to allow for resolving potential circular references
+17:05:10.900 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.batch.item.file.transform.PassThroughLineAggregator#281e3708'
+17:05:10.900 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.batch.item.file.transform.PassThroughLineAggregator#281e3708'
+17:05:10.900 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Invoking afterPropertiesSet() on bean with name 'employeeFlatFileItemWriter'
+17:05:10.916 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean 'employeeFlatFileItemWriter'
+17:05:10.918 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'jobRepository'
+17:05:10.919 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'transactionManager'
+17:05:10.919 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean 'step1'
+17:05:10.919 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'employeesGenerateFeedJob'
+17:05:10.919 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean 'employeesGenerateFeedJob'
+17:05:10.922 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Eagerly caching bean 'employeesGenerateFeedJob' to allow for resolving potential circular references
+17:05:10.922 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean '(inner bean)#466276d8'
+17:05:10.922 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean '(inner bean)#31c7528f'
+17:05:10.922 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean '(inner bean)#53f6fd09'
+17:05:10.922 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'step1'
+17:05:11.069 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean '(inner bean)#53f6fd09'
+17:05:11.069 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean '(inner bean)#31c7528f'
+17:05:11.069 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean '(inner bean)#7ca20101'
+17:05:11.069 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean '(inner bean)#47f9738'
+17:05:11.069 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean '(inner bean)#47f9738'
+17:05:11.069 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean '(inner bean)#7ca20101'
+17:05:11.069 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean '(inner bean)#62ef27a8'
+17:05:11.069 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean '(inner bean)#53f6fd09#1'
+17:05:11.069 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'step1'
+17:05:11.069 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean '(inner bean)#53f6fd09#1'
+17:05:11.069 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean '(inner bean)#62ef27a8'
+17:05:11.069 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean '(inner bean)#74f5ce22'
+17:05:11.069 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean '(inner bean)#53f6fd09#2'
+17:05:11.069 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'step1'
+17:05:11.069 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean '(inner bean)#53f6fd09#2'
+17:05:11.069 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean '(inner bean)#74f5ce22'
+17:05:11.069 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean '(inner bean)#40238dd0'
+17:05:11.069 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean '(inner bean)#7776ab'
+17:05:11.069 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean '(inner bean)#7776ab'
+17:05:11.069 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean '(inner bean)#40238dd0'
+17:05:11.069 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Invoking afterPropertiesSet() on bean with name '(inner bean)#466276d8'
+17:05:11.069 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean '(inner bean)#466276d8'
+17:05:11.085 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'jobRepository'
+17:05:11.085 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean 'employeesGenerateFeedJob'
+17:05:11.085 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'employeesGenerateFeedJob'
+17:05:11.085 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'employeeOracleItemReader'
+17:05:11.085 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'employeeFlatFileItemWriter'
+17:05:11.085 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'employeesFeedService'
+17:05:11.085 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean 'employeesFeedService'
+17:05:11.085 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Eagerly caching bean 'employeesFeedService' to allow for resolving potential circular references
+17:05:11.085 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'jobLauncher'
+17:05:11.100 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'employeesGenerateFeedJob'
+17:05:11.101 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean 'employeesFeedService'
+17:05:11.103 [main] DEBUG o.s.c.s.ClassPathXmlApplicationContext - Unable to locate LifecycleProcessor with name 'lifecycleProcessor': using default [org.springframework.context.support.DefaultLifecycleProcessor@6ad3381f]
+17:05:11.103 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'lifecycleProcessor'
+17:05:11.103 [main] DEBUG o.s.c.e.PropertySourcesPropertyResolver - Searching for key 'spring.liveBeansView.mbeanDomain' in [systemProperties]
+17:05:11.103 [main] DEBUG o.s.c.e.PropertySourcesPropertyResolver - Searching for key 'spring.liveBeansView.mbeanDomain' in [systemEnvironment]
+17:05:11.103 [main] DEBUG o.s.c.e.PropertySourcesPropertyResolver - Could not find key 'spring.liveBeansView.mbeanDomain' in any property source. Returning [null]
+17:05:11.103 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'employeesFeedService'
+17:05:11.122 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Creating new transaction with name [org.springframework.batch.core.repository.support.SimpleJobRepository.getLastJobExecution]: PROPAGATION_REQUIRES_NEW,ISOLATION_SERIALIZABLE
+17:05:11.122 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+17:05:11.122 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT JOB_INSTANCE_ID, JOB_NAME from BATCH_JOB_INSTANCE where JOB_NAME = ? and JOB_KEY = ?]
+17:05:11.122 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+17:05:11.122 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:oracle:thin:@//localhost:1521/ORCL]
+17:05:11.201 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+17:05:11.421 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+17:05:11.422 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Initiating transaction commit
+17:05:11.423 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Committing resourceless transaction on [org.springframework.batch.support.transaction.ResourcelessTransactionManager$ResourcelessTransaction@163d04ff]
+17:05:11.423 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Creating new transaction with name [org.springframework.batch.core.repository.support.SimpleJobRepository.createJobExecution]: PROPAGATION_REQUIRES_NEW,ISOLATION_SERIALIZABLE
+17:05:11.423 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+17:05:11.423 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT JOB_INSTANCE_ID, JOB_NAME from BATCH_JOB_INSTANCE where JOB_NAME = ? and JOB_KEY = ?]
+17:05:11.423 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+17:05:11.423 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:oracle:thin:@//localhost:1521/ORCL]
+17:05:11.501 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+17:05:11.501 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+17:05:11.501 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT JOB_INSTANCE_ID, JOB_NAME from BATCH_JOB_INSTANCE where JOB_NAME = ? and JOB_KEY = ?]
+17:05:11.501 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:11.501 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [INSERT into BATCH_JOB_INSTANCE(JOB_INSTANCE_ID, JOB_NAME, JOB_KEY, VERSION) values (?, ?, ?, ?)]
+17:05:11.570 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:11.586 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:11.586 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [INSERT into BATCH_JOB_EXECUTION(JOB_EXECUTION_ID, JOB_INSTANCE_ID, START_TIME, END_TIME, STATUS, EXIT_CODE, EXIT_MESSAGE, VERSION, CREATE_TIME, LAST_UPDATED) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+17:05:11.601 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:11.623 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:11.623 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [INSERT INTO BATCH_JOB_EXECUTION_CONTEXT (SHORT_CONTEXT, SERIALIZED_CONTEXT, JOB_EXECUTION_ID) VALUES(?, ?, ?)]
+17:05:11.755 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:11.755 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+17:05:11.755 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Initiating transaction commit
+17:05:11.755 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Committing resourceless transaction on [org.springframework.batch.support.transaction.ResourcelessTransactionManager$ResourcelessTransaction@1c7fd41f]
+17:05:11.755 [main] INFO  o.s.b.c.l.support.SimpleJobLauncher - Job: [FlowJob: [name=employeesGenerateFeedJob]] launched with the following parameters: [{}]
+17:05:11.755 [main] DEBUG o.s.batch.core.job.AbstractJob - Job execution starting: JobExecution: id=0, version=0, startTime=null, endTime=null, lastUpdated=Mon Apr 02 17:05:11 CEST 2018, status=STARTING, exitStatus=exitCode=UNKNOWN;exitDescription=, job=[JobInstance: id=0, version=0, Job=[employeesGenerateFeedJob]], jobParameters=[{}]
+17:05:11.755 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Creating new transaction with name [org.springframework.batch.core.repository.support.SimpleJobRepository.update]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+17:05:11.755 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+17:05:11.755 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT COUNT(*) FROM BATCH_JOB_EXECUTION WHERE JOB_EXECUTION_ID = ?]
+17:05:11.755 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+17:05:11.755 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:oracle:thin:@//localhost:1521/ORCL]
+17:05:11.839 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+17:05:11.839 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:11.839 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_JOB_EXECUTION set START_TIME = ?, END_TIME = ?,  STATUS = ?, EXIT_CODE = ?, EXIT_MESSAGE = ?, VERSION = ?, CREATE_TIME = ?, LAST_UPDATED = ? where JOB_EXECUTION_ID = ? and VERSION = ?]
+17:05:11.855 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:11.855 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+17:05:11.855 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Initiating transaction commit
+17:05:11.855 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Committing resourceless transaction on [org.springframework.batch.support.transaction.ResourcelessTransactionManager$ResourcelessTransaction@354fc8f0]
+17:05:11.855 [main] DEBUG o.s.b.c.job.flow.support.SimpleFlow - Resuming state=employeesGenerateFeedJob.step1 with status=UNKNOWN
+17:05:11.855 [main] DEBUG o.s.b.c.job.flow.support.SimpleFlow - Handling state=employeesGenerateFeedJob.step1
+17:05:11.855 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Creating new transaction with name [org.springframework.batch.core.repository.support.SimpleJobRepository.getStepExecutionCount]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+17:05:11.855 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+17:05:11.855 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT JOB_EXECUTION_ID, START_TIME, END_TIME, STATUS, EXIT_CODE, EXIT_MESSAGE, CREATE_TIME, LAST_UPDATED, VERSION from BATCH_JOB_EXECUTION where JOB_INSTANCE_ID = ? order by JOB_EXECUTION_ID desc]
+17:05:11.855 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+17:05:11.855 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:oracle:thin:@//localhost:1521/ORCL]
+17:05:11.940 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+17:05:11.955 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+17:05:11.955 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT JOB_EXECUTION_ID, KEY_NAME, TYPE_CD, STRING_VAL, DATE_VAL, LONG_VAL, DOUBLE_VAL, IDENTIFYING from BATCH_JOB_EXECUTION_PARAMS where JOB_EXECUTION_ID = ?]
+17:05:11.971 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+17:05:11.971 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT STEP_EXECUTION_ID, STEP_NAME, START_TIME, END_TIME, STATUS, COMMIT_COUNT, READ_COUNT, FILTER_COUNT, WRITE_COUNT, EXIT_CODE, EXIT_MESSAGE, READ_SKIP_COUNT, WRITE_SKIP_COUNT, PROCESS_SKIP_COUNT, ROLLBACK_COUNT, LAST_UPDATED, VERSION from BATCH_STEP_EXECUTION where JOB_EXECUTION_ID = ? order by STEP_EXECUTION_ID]
+17:05:12.002 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+17:05:12.002 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Initiating transaction commit
+17:05:12.002 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Committing resourceless transaction on [org.springframework.batch.support.transaction.ResourcelessTransactionManager$ResourcelessTransaction@75ed9710]
+17:05:12.002 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Creating new transaction with name [org.springframework.batch.core.repository.support.SimpleJobRepository.getLastStepExecution]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+17:05:12.002 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+17:05:12.002 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT JOB_EXECUTION_ID, START_TIME, END_TIME, STATUS, EXIT_CODE, EXIT_MESSAGE, CREATE_TIME, LAST_UPDATED, VERSION from BATCH_JOB_EXECUTION where JOB_INSTANCE_ID = ? order by JOB_EXECUTION_ID desc]
+17:05:12.002 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+17:05:12.002 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:oracle:thin:@//localhost:1521/ORCL]
+17:05:12.087 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+17:05:12.087 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+17:05:12.087 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT JOB_EXECUTION_ID, KEY_NAME, TYPE_CD, STRING_VAL, DATE_VAL, LONG_VAL, DOUBLE_VAL, IDENTIFYING from BATCH_JOB_EXECUTION_PARAMS where JOB_EXECUTION_ID = ?]
+17:05:12.087 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+17:05:12.087 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT STEP_EXECUTION_ID, STEP_NAME, START_TIME, END_TIME, STATUS, COMMIT_COUNT, READ_COUNT, FILTER_COUNT, WRITE_COUNT, EXIT_CODE, EXIT_MESSAGE, READ_SKIP_COUNT, WRITE_SKIP_COUNT, PROCESS_SKIP_COUNT, ROLLBACK_COUNT, LAST_UPDATED, VERSION from BATCH_STEP_EXECUTION where JOB_EXECUTION_ID = ? order by STEP_EXECUTION_ID]
+17:05:12.087 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+17:05:12.087 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Initiating transaction commit
+17:05:12.087 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Committing resourceless transaction on [org.springframework.batch.support.transaction.ResourcelessTransactionManager$ResourcelessTransaction@192d74fb]
+17:05:12.087 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Creating new transaction with name [org.springframework.batch.core.repository.support.SimpleJobRepository.getStepExecutionCount]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+17:05:12.087 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+17:05:12.087 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT JOB_EXECUTION_ID, START_TIME, END_TIME, STATUS, EXIT_CODE, EXIT_MESSAGE, CREATE_TIME, LAST_UPDATED, VERSION from BATCH_JOB_EXECUTION where JOB_INSTANCE_ID = ? order by JOB_EXECUTION_ID desc]
+17:05:12.087 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+17:05:12.087 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:oracle:thin:@//localhost:1521/ORCL]
+17:05:12.172 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+17:05:12.175 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+17:05:12.175 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT JOB_EXECUTION_ID, KEY_NAME, TYPE_CD, STRING_VAL, DATE_VAL, LONG_VAL, DOUBLE_VAL, IDENTIFYING from BATCH_JOB_EXECUTION_PARAMS where JOB_EXECUTION_ID = ?]
+17:05:12.176 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+17:05:12.176 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT STEP_EXECUTION_ID, STEP_NAME, START_TIME, END_TIME, STATUS, COMMIT_COUNT, READ_COUNT, FILTER_COUNT, WRITE_COUNT, EXIT_CODE, EXIT_MESSAGE, READ_SKIP_COUNT, WRITE_SKIP_COUNT, PROCESS_SKIP_COUNT, ROLLBACK_COUNT, LAST_UPDATED, VERSION from BATCH_STEP_EXECUTION where JOB_EXECUTION_ID = ? order by STEP_EXECUTION_ID]
+17:05:12.176 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+17:05:12.176 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Initiating transaction commit
+17:05:12.176 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Committing resourceless transaction on [org.springframework.batch.support.transaction.ResourcelessTransactionManager$ResourcelessTransaction@66ce957f]
+17:05:12.176 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Creating new transaction with name [org.springframework.batch.core.repository.support.SimpleJobRepository.add]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+17:05:12.176 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+17:05:12.176 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:oracle:thin:@//localhost:1521/ORCL]
+17:05:12.271 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+17:05:12.271 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:12.271 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [INSERT into BATCH_STEP_EXECUTION(STEP_EXECUTION_ID, VERSION, STEP_NAME, JOB_EXECUTION_ID, START_TIME, END_TIME, STATUS, COMMIT_COUNT, READ_COUNT, FILTER_COUNT, WRITE_COUNT, EXIT_CODE, EXIT_MESSAGE, READ_SKIP_COUNT, WRITE_SKIP_COUNT, PROCESS_SKIP_COUNT, ROLLBACK_COUNT, LAST_UPDATED) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+17:05:12.287 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:12.287 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:12.287 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [INSERT INTO BATCH_STEP_EXECUTION_CONTEXT (SHORT_CONTEXT, SERIALIZED_CONTEXT, STEP_EXECUTION_ID) VALUES(?, ?, ?)]
+17:05:12.641 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:12.641 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+17:05:12.641 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Initiating transaction commit
+17:05:12.641 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Committing resourceless transaction on [org.springframework.batch.support.transaction.ResourcelessTransactionManager$ResourcelessTransaction@16ecee1]
+17:05:12.641 [main] INFO  o.s.batch.core.job.SimpleStepHandler - Executing step: [step1]
+17:05:12.641 [main] DEBUG o.s.batch.core.step.AbstractStep - Executing: id=0
+17:05:12.641 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Creating new transaction with name [org.springframework.batch.core.repository.support.SimpleJobRepository.update]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+17:05:12.641 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:12.641 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_STEP_EXECUTION set START_TIME = ?, END_TIME = ?, STATUS = ?, COMMIT_COUNT = ?, READ_COUNT = ?, FILTER_COUNT = ?, WRITE_COUNT = ?, EXIT_CODE = ?, EXIT_MESSAGE = ?, VERSION = ?, READ_SKIP_COUNT = ?, PROCESS_SKIP_COUNT = ?, WRITE_SKIP_COUNT = ?, ROLLBACK_COUNT = ?, LAST_UPDATED = ? where STEP_EXECUTION_ID = ? and VERSION = ?]
+17:05:12.641 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+17:05:12.641 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:oracle:thin:@//localhost:1521/ORCL]
+17:05:12.723 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+17:05:12.725 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:12.725 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+17:05:12.725 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT VERSION FROM BATCH_JOB_EXECUTION WHERE JOB_EXECUTION_ID=?]
+17:05:12.725 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+17:05:12.725 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Initiating transaction commit
+17:05:12.725 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Committing resourceless transaction on [org.springframework.batch.support.transaction.ResourcelessTransactionManager$ResourcelessTransaction@3dddefd8]
+17:05:12.725 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:oracle:thin:@//localhost:1521/ORCL]
+17:05:12.825 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Creating new transaction with name [org.springframework.batch.core.repository.support.SimpleJobRepository.updateExecutionContext]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+17:05:12.825 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:12.825 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_STEP_EXECUTION_CONTEXT SET SHORT_CONTEXT = ?, SERIALIZED_CONTEXT = ? WHERE STEP_EXECUTION_ID = ?]
+17:05:12.825 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+17:05:12.825 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:oracle:thin:@//localhost:1521/ORCL]
+17:05:12.888 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+17:05:12.904 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:12.904 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+17:05:12.904 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Initiating transaction commit
+17:05:12.904 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Committing resourceless transaction on [org.springframework.batch.support.transaction.ResourcelessTransactionManager$ResourcelessTransaction@37bd68c3]
+17:05:12.904 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Starting repeat context.
+17:05:12.904 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=1
+17:05:12.904 [main] DEBUG o.s.b.c.s.c.StepContextRepeatCallback - Preparing chunk execution for StepContext: org.springframework.batch.core.scope.context.StepContext@14f5da2c
+17:05:12.904 [main] DEBUG o.s.b.c.s.c.StepContextRepeatCallback - Chunk execution starting: queue size=0
+17:05:12.904 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Creating new transaction with name [null]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+17:05:12.922 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Starting repeat context.
+17:05:12.922 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=1
+17:05:12.923 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=2
+17:05:12.923 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=3
+17:05:12.923 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=4
+17:05:12.923 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=5
+17:05:12.923 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=6
+17:05:12.924 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=7
+17:05:12.924 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=8
+17:05:12.924 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=9
+17:05:12.924 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=10
+17:05:12.924 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat is complete according to policy and result value.
+17:05:12.925 [main] DEBUG o.s.b.item.file.FlatFileItemWriter - Writing to flat file with 10 items.
+17:05:12.926 [main] DEBUG o.s.b.c.s.item.ChunkOrientedTasklet - Inputs not busy, ended: false
+17:05:12.926 [main] DEBUG o.s.b.core.step.tasklet.TaskletStep - Applying contribution: [StepContribution: read=10, written=10, filtered=0, readSkips=0, writeSkips=0, processSkips=0, exitStatus=EXECUTING]
+17:05:12.926 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Participating in existing transaction
+17:05:12.926 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:12.926 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_STEP_EXECUTION_CONTEXT SET SHORT_CONTEXT = ?, SERIALIZED_CONTEXT = ? WHERE STEP_EXECUTION_ID = ?]
+17:05:12.926 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+17:05:12.926 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:oracle:thin:@//localhost:1521/ORCL]
+17:05:12.988 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+17:05:12.988 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:12.988 [main] DEBUG o.s.b.core.step.tasklet.TaskletStep - Saving step execution before commit: StepExecution: id=0, version=1, name=step1, status=STARTED, exitStatus=EXECUTING, readCount=10, filterCount=0, writeCount=10 readSkipCount=0, writeSkipCount=0, processSkipCount=0, commitCount=1, rollbackCount=0, exitDescription=
+17:05:12.988 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Participating in existing transaction
+17:05:12.988 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:12.988 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_STEP_EXECUTION set START_TIME = ?, END_TIME = ?, STATUS = ?, COMMIT_COUNT = ?, READ_COUNT = ?, FILTER_COUNT = ?, WRITE_COUNT = ?, EXIT_CODE = ?, EXIT_MESSAGE = ?, VERSION = ?, READ_SKIP_COUNT = ?, PROCESS_SKIP_COUNT = ?, WRITE_SKIP_COUNT = ?, ROLLBACK_COUNT = ?, LAST_UPDATED = ? where STEP_EXECUTION_ID = ? and VERSION = ?]
+17:05:12.988 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:12.988 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+17:05:12.988 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT VERSION FROM BATCH_JOB_EXECUTION WHERE JOB_EXECUTION_ID=?]
+17:05:12.988 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+17:05:13.004 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Initiating transaction commit
+17:05:13.004 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Committing resourceless transaction on [org.springframework.batch.support.transaction.ResourcelessTransactionManager$ResourcelessTransaction@4264b240]
+17:05:13.004 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=2
+17:05:13.004 [main] DEBUG o.s.b.c.s.c.StepContextRepeatCallback - Preparing chunk execution for StepContext: org.springframework.batch.core.scope.context.StepContext@14f5da2c
+17:05:13.004 [main] DEBUG o.s.b.c.s.c.StepContextRepeatCallback - Chunk execution starting: queue size=0
+17:05:13.004 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Creating new transaction with name [null]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+17:05:13.004 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Starting repeat context.
+17:05:13.004 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=1
+17:05:13.004 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=2
+17:05:13.004 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=3
+17:05:13.004 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=4
+17:05:13.004 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=5
+17:05:13.004 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=6
+17:05:13.004 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=7
+17:05:13.004 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=8
+17:05:13.004 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=9
+17:05:13.004 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=10
+17:05:13.004 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat is complete according to policy and result value.
+17:05:13.004 [main] DEBUG o.s.b.item.file.FlatFileItemWriter - Writing to flat file with 10 items.
+17:05:13.004 [main] DEBUG o.s.b.c.s.item.ChunkOrientedTasklet - Inputs not busy, ended: false
+17:05:13.004 [main] DEBUG o.s.b.core.step.tasklet.TaskletStep - Applying contribution: [StepContribution: read=10, written=10, filtered=0, readSkips=0, writeSkips=0, processSkips=0, exitStatus=EXECUTING]
+17:05:13.004 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Participating in existing transaction
+17:05:13.004 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:13.004 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_STEP_EXECUTION_CONTEXT SET SHORT_CONTEXT = ?, SERIALIZED_CONTEXT = ? WHERE STEP_EXECUTION_ID = ?]
+17:05:13.004 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+17:05:13.004 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:oracle:thin:@//localhost:1521/ORCL]
+17:05:13.072 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+17:05:13.072 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:13.072 [main] DEBUG o.s.b.core.step.tasklet.TaskletStep - Saving step execution before commit: StepExecution: id=0, version=2, name=step1, status=STARTED, exitStatus=EXECUTING, readCount=20, filterCount=0, writeCount=20 readSkipCount=0, writeSkipCount=0, processSkipCount=0, commitCount=2, rollbackCount=0, exitDescription=
+17:05:13.072 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Participating in existing transaction
+17:05:13.072 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:13.072 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_STEP_EXECUTION set START_TIME = ?, END_TIME = ?, STATUS = ?, COMMIT_COUNT = ?, READ_COUNT = ?, FILTER_COUNT = ?, WRITE_COUNT = ?, EXIT_CODE = ?, EXIT_MESSAGE = ?, VERSION = ?, READ_SKIP_COUNT = ?, PROCESS_SKIP_COUNT = ?, WRITE_SKIP_COUNT = ?, ROLLBACK_COUNT = ?, LAST_UPDATED = ? where STEP_EXECUTION_ID = ? and VERSION = ?]
+17:05:13.072 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:13.072 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+17:05:13.072 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT VERSION FROM BATCH_JOB_EXECUTION WHERE JOB_EXECUTION_ID=?]
+17:05:13.072 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+17:05:13.072 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Initiating transaction commit
+17:05:13.072 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Committing resourceless transaction on [org.springframework.batch.support.transaction.ResourcelessTransactionManager$ResourcelessTransaction@76f7d241]
+17:05:13.072 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=3
+17:05:13.072 [main] DEBUG o.s.b.c.s.c.StepContextRepeatCallback - Preparing chunk execution for StepContext: org.springframework.batch.core.scope.context.StepContext@14f5da2c
+17:05:13.072 [main] DEBUG o.s.b.c.s.c.StepContextRepeatCallback - Chunk execution starting: queue size=0
+17:05:13.072 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Creating new transaction with name [null]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+17:05:13.072 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Starting repeat context.
+17:05:13.072 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=1
+17:05:13.072 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=2
+17:05:13.072 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=3
+17:05:13.072 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=4
+17:05:13.072 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=5
+17:05:13.072 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=6
+17:05:13.072 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=7
+17:05:13.072 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=8
+17:05:13.072 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=9
+17:05:13.072 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=10
+17:05:13.072 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat is complete according to policy and result value.
+17:05:13.072 [main] DEBUG o.s.b.item.file.FlatFileItemWriter - Writing to flat file with 10 items.
+17:05:13.072 [main] DEBUG o.s.b.c.s.item.ChunkOrientedTasklet - Inputs not busy, ended: false
+17:05:13.072 [main] DEBUG o.s.b.core.step.tasklet.TaskletStep - Applying contribution: [StepContribution: read=10, written=10, filtered=0, readSkips=0, writeSkips=0, processSkips=0, exitStatus=EXECUTING]
+17:05:13.072 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Participating in existing transaction
+17:05:13.088 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:13.088 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_STEP_EXECUTION_CONTEXT SET SHORT_CONTEXT = ?, SERIALIZED_CONTEXT = ? WHERE STEP_EXECUTION_ID = ?]
+17:05:13.088 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+17:05:13.088 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:oracle:thin:@//localhost:1521/ORCL]
+17:05:13.142 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+17:05:13.157 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:13.157 [main] DEBUG o.s.b.core.step.tasklet.TaskletStep - Saving step execution before commit: StepExecution: id=0, version=3, name=step1, status=STARTED, exitStatus=EXECUTING, readCount=30, filterCount=0, writeCount=30 readSkipCount=0, writeSkipCount=0, processSkipCount=0, commitCount=3, rollbackCount=0, exitDescription=
+17:05:13.157 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Participating in existing transaction
+17:05:13.157 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:13.157 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_STEP_EXECUTION set START_TIME = ?, END_TIME = ?, STATUS = ?, COMMIT_COUNT = ?, READ_COUNT = ?, FILTER_COUNT = ?, WRITE_COUNT = ?, EXIT_CODE = ?, EXIT_MESSAGE = ?, VERSION = ?, READ_SKIP_COUNT = ?, PROCESS_SKIP_COUNT = ?, WRITE_SKIP_COUNT = ?, ROLLBACK_COUNT = ?, LAST_UPDATED = ? where STEP_EXECUTION_ID = ? and VERSION = ?]
+17:05:13.157 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:13.157 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+17:05:13.157 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT VERSION FROM BATCH_JOB_EXECUTION WHERE JOB_EXECUTION_ID=?]
+17:05:13.157 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+17:05:13.157 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Initiating transaction commit
+17:05:13.157 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Committing resourceless transaction on [org.springframework.batch.support.transaction.ResourcelessTransactionManager$ResourcelessTransaction@22d6f11]
+17:05:13.157 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=4
+17:05:13.157 [main] DEBUG o.s.b.c.s.c.StepContextRepeatCallback - Preparing chunk execution for StepContext: org.springframework.batch.core.scope.context.StepContext@14f5da2c
+17:05:13.157 [main] DEBUG o.s.b.c.s.c.StepContextRepeatCallback - Chunk execution starting: queue size=0
+17:05:13.157 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Creating new transaction with name [null]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+17:05:13.157 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Starting repeat context.
+17:05:13.157 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=1
+17:05:13.157 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=2
+17:05:13.157 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=3
+17:05:13.157 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=4
+17:05:13.157 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=5
+17:05:13.157 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=6
+17:05:13.157 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=7
+17:05:13.157 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=8
+17:05:13.157 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=9
+17:05:13.157 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=10
+17:05:13.157 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat is complete according to policy and result value.
+17:05:13.157 [main] DEBUG o.s.b.item.file.FlatFileItemWriter - Writing to flat file with 10 items.
+17:05:13.157 [main] DEBUG o.s.b.c.s.item.ChunkOrientedTasklet - Inputs not busy, ended: false
+17:05:13.157 [main] DEBUG o.s.b.core.step.tasklet.TaskletStep - Applying contribution: [StepContribution: read=10, written=10, filtered=0, readSkips=0, writeSkips=0, processSkips=0, exitStatus=EXECUTING]
+17:05:13.157 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Participating in existing transaction
+17:05:13.157 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:13.157 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_STEP_EXECUTION_CONTEXT SET SHORT_CONTEXT = ?, SERIALIZED_CONTEXT = ? WHERE STEP_EXECUTION_ID = ?]
+17:05:13.157 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+17:05:13.157 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:oracle:thin:@//localhost:1521/ORCL]
+17:05:13.226 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+17:05:13.232 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:13.232 [main] DEBUG o.s.b.core.step.tasklet.TaskletStep - Saving step execution before commit: StepExecution: id=0, version=4, name=step1, status=STARTED, exitStatus=EXECUTING, readCount=40, filterCount=0, writeCount=40 readSkipCount=0, writeSkipCount=0, processSkipCount=0, commitCount=4, rollbackCount=0, exitDescription=
+17:05:13.232 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Participating in existing transaction
+17:05:13.233 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:13.233 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_STEP_EXECUTION set START_TIME = ?, END_TIME = ?, STATUS = ?, COMMIT_COUNT = ?, READ_COUNT = ?, FILTER_COUNT = ?, WRITE_COUNT = ?, EXIT_CODE = ?, EXIT_MESSAGE = ?, VERSION = ?, READ_SKIP_COUNT = ?, PROCESS_SKIP_COUNT = ?, WRITE_SKIP_COUNT = ?, ROLLBACK_COUNT = ?, LAST_UPDATED = ? where STEP_EXECUTION_ID = ? and VERSION = ?]
+17:05:13.233 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:13.233 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+17:05:13.233 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT VERSION FROM BATCH_JOB_EXECUTION WHERE JOB_EXECUTION_ID=?]
+17:05:13.233 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+17:05:13.233 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Initiating transaction commit
+17:05:13.233 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Committing resourceless transaction on [org.springframework.batch.support.transaction.ResourcelessTransactionManager$ResourcelessTransaction@3e34ace1]
+17:05:13.233 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=5
+17:05:13.233 [main] DEBUG o.s.b.c.s.c.StepContextRepeatCallback - Preparing chunk execution for StepContext: org.springframework.batch.core.scope.context.StepContext@14f5da2c
+17:05:13.233 [main] DEBUG o.s.b.c.s.c.StepContextRepeatCallback - Chunk execution starting: queue size=0
+17:05:13.233 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Creating new transaction with name [null]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+17:05:13.233 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Starting repeat context.
+17:05:13.233 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=1
+17:05:13.233 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=2
+17:05:13.233 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=3
+17:05:13.233 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=4
+17:05:13.233 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=5
+17:05:13.233 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=6
+17:05:13.233 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=7
+17:05:13.233 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=8
+17:05:13.233 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=9
+17:05:13.233 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=10
+17:05:13.233 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat is complete according to policy and result value.
+17:05:13.233 [main] DEBUG o.s.b.item.file.FlatFileItemWriter - Writing to flat file with 10 items.
+17:05:13.233 [main] DEBUG o.s.b.c.s.item.ChunkOrientedTasklet - Inputs not busy, ended: false
+17:05:13.233 [main] DEBUG o.s.b.core.step.tasklet.TaskletStep - Applying contribution: [StepContribution: read=10, written=10, filtered=0, readSkips=0, writeSkips=0, processSkips=0, exitStatus=EXECUTING]
+17:05:13.233 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Participating in existing transaction
+17:05:13.233 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:13.233 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_STEP_EXECUTION_CONTEXT SET SHORT_CONTEXT = ?, SERIALIZED_CONTEXT = ? WHERE STEP_EXECUTION_ID = ?]
+17:05:13.233 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+17:05:13.233 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:oracle:thin:@//localhost:1521/ORCL]
+17:05:13.326 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+17:05:13.326 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:13.326 [main] DEBUG o.s.b.core.step.tasklet.TaskletStep - Saving step execution before commit: StepExecution: id=0, version=5, name=step1, status=STARTED, exitStatus=EXECUTING, readCount=50, filterCount=0, writeCount=50 readSkipCount=0, writeSkipCount=0, processSkipCount=0, commitCount=5, rollbackCount=0, exitDescription=
+17:05:13.326 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Participating in existing transaction
+17:05:13.326 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:13.326 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_STEP_EXECUTION set START_TIME = ?, END_TIME = ?, STATUS = ?, COMMIT_COUNT = ?, READ_COUNT = ?, FILTER_COUNT = ?, WRITE_COUNT = ?, EXIT_CODE = ?, EXIT_MESSAGE = ?, VERSION = ?, READ_SKIP_COUNT = ?, PROCESS_SKIP_COUNT = ?, WRITE_SKIP_COUNT = ?, ROLLBACK_COUNT = ?, LAST_UPDATED = ? where STEP_EXECUTION_ID = ? and VERSION = ?]
+17:05:13.326 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:13.326 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+17:05:13.326 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT VERSION FROM BATCH_JOB_EXECUTION WHERE JOB_EXECUTION_ID=?]
+17:05:13.326 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+17:05:13.326 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Initiating transaction commit
+17:05:13.326 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Committing resourceless transaction on [org.springframework.batch.support.transaction.ResourcelessTransactionManager$ResourcelessTransaction@38be305c]
+17:05:13.326 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=6
+17:05:13.326 [main] DEBUG o.s.b.c.s.c.StepContextRepeatCallback - Preparing chunk execution for StepContext: org.springframework.batch.core.scope.context.StepContext@14f5da2c
+17:05:13.326 [main] DEBUG o.s.b.c.s.c.StepContextRepeatCallback - Chunk execution starting: queue size=0
+17:05:13.326 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Creating new transaction with name [null]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+17:05:13.326 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Starting repeat context.
+17:05:13.326 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=1
+17:05:13.326 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=2
+17:05:13.326 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=3
+17:05:13.326 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=4
+17:05:13.326 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=5
+17:05:13.326 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=6
+17:05:13.326 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=7
+17:05:13.326 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=8
+17:05:13.326 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=9
+17:05:13.326 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=10
+17:05:13.326 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat is complete according to policy and result value.
+17:05:13.326 [main] DEBUG o.s.b.item.file.FlatFileItemWriter - Writing to flat file with 10 items.
+17:05:13.326 [main] DEBUG o.s.b.c.s.item.ChunkOrientedTasklet - Inputs not busy, ended: false
+17:05:13.326 [main] DEBUG o.s.b.core.step.tasklet.TaskletStep - Applying contribution: [StepContribution: read=10, written=10, filtered=0, readSkips=0, writeSkips=0, processSkips=0, exitStatus=EXECUTING]
+17:05:13.326 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Participating in existing transaction
+17:05:13.326 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:13.326 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_STEP_EXECUTION_CONTEXT SET SHORT_CONTEXT = ?, SERIALIZED_CONTEXT = ? WHERE STEP_EXECUTION_ID = ?]
+17:05:13.326 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+17:05:13.326 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:oracle:thin:@//localhost:1521/ORCL]
+17:05:13.405 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+17:05:13.405 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:13.405 [main] DEBUG o.s.b.core.step.tasklet.TaskletStep - Saving step execution before commit: StepExecution: id=0, version=6, name=step1, status=STARTED, exitStatus=EXECUTING, readCount=60, filterCount=0, writeCount=60 readSkipCount=0, writeSkipCount=0, processSkipCount=0, commitCount=6, rollbackCount=0, exitDescription=
+17:05:13.405 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Participating in existing transaction
+17:05:13.405 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:13.405 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_STEP_EXECUTION set START_TIME = ?, END_TIME = ?, STATUS = ?, COMMIT_COUNT = ?, READ_COUNT = ?, FILTER_COUNT = ?, WRITE_COUNT = ?, EXIT_CODE = ?, EXIT_MESSAGE = ?, VERSION = ?, READ_SKIP_COUNT = ?, PROCESS_SKIP_COUNT = ?, WRITE_SKIP_COUNT = ?, ROLLBACK_COUNT = ?, LAST_UPDATED = ? where STEP_EXECUTION_ID = ? and VERSION = ?]
+17:05:13.405 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:13.405 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+17:05:13.405 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT VERSION FROM BATCH_JOB_EXECUTION WHERE JOB_EXECUTION_ID=?]
+17:05:13.405 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+17:05:13.405 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Initiating transaction commit
+17:05:13.405 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Committing resourceless transaction on [org.springframework.batch.support.transaction.ResourcelessTransactionManager$ResourcelessTransaction@557a1e2d]
+17:05:13.405 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=7
+17:05:13.405 [main] DEBUG o.s.b.c.s.c.StepContextRepeatCallback - Preparing chunk execution for StepContext: org.springframework.batch.core.scope.context.StepContext@14f5da2c
+17:05:13.405 [main] DEBUG o.s.b.c.s.c.StepContextRepeatCallback - Chunk execution starting: queue size=0
+17:05:13.405 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Creating new transaction with name [null]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+17:05:13.405 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Starting repeat context.
+17:05:13.405 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=1
+17:05:13.405 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=2
+17:05:13.405 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=3
+17:05:13.405 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=4
+17:05:13.405 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=5
+17:05:13.405 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=6
+17:05:13.405 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=7
+17:05:13.405 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=8
+17:05:13.405 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=9
+17:05:13.405 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=10
+17:05:13.405 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat is complete according to policy and result value.
+17:05:13.405 [main] DEBUG o.s.b.item.file.FlatFileItemWriter - Writing to flat file with 10 items.
+17:05:13.405 [main] DEBUG o.s.b.c.s.item.ChunkOrientedTasklet - Inputs not busy, ended: false
+17:05:13.405 [main] DEBUG o.s.b.core.step.tasklet.TaskletStep - Applying contribution: [StepContribution: read=10, written=10, filtered=0, readSkips=0, writeSkips=0, processSkips=0, exitStatus=EXECUTING]
+17:05:13.405 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Participating in existing transaction
+17:05:13.420 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:13.420 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_STEP_EXECUTION_CONTEXT SET SHORT_CONTEXT = ?, SERIALIZED_CONTEXT = ? WHERE STEP_EXECUTION_ID = ?]
+17:05:13.420 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+17:05:13.420 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:oracle:thin:@//localhost:1521/ORCL]
+17:05:13.473 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+17:05:13.489 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:13.489 [main] DEBUG o.s.b.core.step.tasklet.TaskletStep - Saving step execution before commit: StepExecution: id=0, version=7, name=step1, status=STARTED, exitStatus=EXECUTING, readCount=70, filterCount=0, writeCount=70 readSkipCount=0, writeSkipCount=0, processSkipCount=0, commitCount=7, rollbackCount=0, exitDescription=
+17:05:13.489 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Participating in existing transaction
+17:05:13.489 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:13.489 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_STEP_EXECUTION set START_TIME = ?, END_TIME = ?, STATUS = ?, COMMIT_COUNT = ?, READ_COUNT = ?, FILTER_COUNT = ?, WRITE_COUNT = ?, EXIT_CODE = ?, EXIT_MESSAGE = ?, VERSION = ?, READ_SKIP_COUNT = ?, PROCESS_SKIP_COUNT = ?, WRITE_SKIP_COUNT = ?, ROLLBACK_COUNT = ?, LAST_UPDATED = ? where STEP_EXECUTION_ID = ? and VERSION = ?]
+17:05:13.489 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:13.489 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+17:05:13.489 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT VERSION FROM BATCH_JOB_EXECUTION WHERE JOB_EXECUTION_ID=?]
+17:05:13.489 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+17:05:13.489 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Initiating transaction commit
+17:05:13.489 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Committing resourceless transaction on [org.springframework.batch.support.transaction.ResourcelessTransactionManager$ResourcelessTransaction@4b3c354a]
+17:05:13.489 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=8
+17:05:13.489 [main] DEBUG o.s.b.c.s.c.StepContextRepeatCallback - Preparing chunk execution for StepContext: org.springframework.batch.core.scope.context.StepContext@14f5da2c
+17:05:13.489 [main] DEBUG o.s.b.c.s.c.StepContextRepeatCallback - Chunk execution starting: queue size=0
+17:05:13.489 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Creating new transaction with name [null]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+17:05:13.489 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Starting repeat context.
+17:05:13.489 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=1
+17:05:13.489 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=2
+17:05:13.489 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=3
+17:05:13.489 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=4
+17:05:13.489 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=5
+17:05:13.489 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=6
+17:05:13.489 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=7
+17:05:13.489 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=8
+17:05:13.489 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=9
+17:05:13.489 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=10
+17:05:13.489 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat is complete according to policy and result value.
+17:05:13.489 [main] DEBUG o.s.b.item.file.FlatFileItemWriter - Writing to flat file with 10 items.
+17:05:13.489 [main] DEBUG o.s.b.c.s.item.ChunkOrientedTasklet - Inputs not busy, ended: false
+17:05:13.489 [main] DEBUG o.s.b.core.step.tasklet.TaskletStep - Applying contribution: [StepContribution: read=10, written=10, filtered=0, readSkips=0, writeSkips=0, processSkips=0, exitStatus=EXECUTING]
+17:05:13.489 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Participating in existing transaction
+17:05:13.489 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:13.489 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_STEP_EXECUTION_CONTEXT SET SHORT_CONTEXT = ?, SERIALIZED_CONTEXT = ? WHERE STEP_EXECUTION_ID = ?]
+17:05:13.489 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+17:05:13.489 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:oracle:thin:@//localhost:1521/ORCL]
+17:05:13.558 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+17:05:13.558 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:13.558 [main] DEBUG o.s.b.core.step.tasklet.TaskletStep - Saving step execution before commit: StepExecution: id=0, version=8, name=step1, status=STARTED, exitStatus=EXECUTING, readCount=80, filterCount=0, writeCount=80 readSkipCount=0, writeSkipCount=0, processSkipCount=0, commitCount=8, rollbackCount=0, exitDescription=
+17:05:13.558 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Participating in existing transaction
+17:05:13.558 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:13.558 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_STEP_EXECUTION set START_TIME = ?, END_TIME = ?, STATUS = ?, COMMIT_COUNT = ?, READ_COUNT = ?, FILTER_COUNT = ?, WRITE_COUNT = ?, EXIT_CODE = ?, EXIT_MESSAGE = ?, VERSION = ?, READ_SKIP_COUNT = ?, PROCESS_SKIP_COUNT = ?, WRITE_SKIP_COUNT = ?, ROLLBACK_COUNT = ?, LAST_UPDATED = ? where STEP_EXECUTION_ID = ? and VERSION = ?]
+17:05:13.558 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:13.558 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+17:05:13.558 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT VERSION FROM BATCH_JOB_EXECUTION WHERE JOB_EXECUTION_ID=?]
+17:05:13.558 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+17:05:13.558 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Initiating transaction commit
+17:05:13.558 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Committing resourceless transaction on [org.springframework.batch.support.transaction.ResourcelessTransactionManager$ResourcelessTransaction@54227100]
+17:05:13.558 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=9
+17:05:13.558 [main] DEBUG o.s.b.c.s.c.StepContextRepeatCallback - Preparing chunk execution for StepContext: org.springframework.batch.core.scope.context.StepContext@14f5da2c
+17:05:13.558 [main] DEBUG o.s.b.c.s.c.StepContextRepeatCallback - Chunk execution starting: queue size=0
+17:05:13.558 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Creating new transaction with name [null]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+17:05:13.558 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Starting repeat context.
+17:05:13.558 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=1
+17:05:13.558 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=2
+17:05:13.558 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=3
+17:05:13.573 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=4
+17:05:13.573 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=5
+17:05:13.573 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=6
+17:05:13.573 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=7
+17:05:13.573 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=8
+17:05:13.573 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=9
+17:05:13.573 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=10
+17:05:13.573 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat is complete according to policy and result value.
+17:05:13.573 [main] DEBUG o.s.b.item.file.FlatFileItemWriter - Writing to flat file with 10 items.
+17:05:13.573 [main] DEBUG o.s.b.c.s.item.ChunkOrientedTasklet - Inputs not busy, ended: false
+17:05:13.573 [main] DEBUG o.s.b.core.step.tasklet.TaskletStep - Applying contribution: [StepContribution: read=10, written=10, filtered=0, readSkips=0, writeSkips=0, processSkips=0, exitStatus=EXECUTING]
+17:05:13.573 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Participating in existing transaction
+17:05:13.573 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:13.573 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_STEP_EXECUTION_CONTEXT SET SHORT_CONTEXT = ?, SERIALIZED_CONTEXT = ? WHERE STEP_EXECUTION_ID = ?]
+17:05:13.573 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+17:05:13.573 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:oracle:thin:@//localhost:1521/ORCL]
+17:05:13.627 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+17:05:13.627 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:13.627 [main] DEBUG o.s.b.core.step.tasklet.TaskletStep - Saving step execution before commit: StepExecution: id=0, version=9, name=step1, status=STARTED, exitStatus=EXECUTING, readCount=90, filterCount=0, writeCount=90 readSkipCount=0, writeSkipCount=0, processSkipCount=0, commitCount=9, rollbackCount=0, exitDescription=
+17:05:13.627 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Participating in existing transaction
+17:05:13.627 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:13.627 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_STEP_EXECUTION set START_TIME = ?, END_TIME = ?, STATUS = ?, COMMIT_COUNT = ?, READ_COUNT = ?, FILTER_COUNT = ?, WRITE_COUNT = ?, EXIT_CODE = ?, EXIT_MESSAGE = ?, VERSION = ?, READ_SKIP_COUNT = ?, PROCESS_SKIP_COUNT = ?, WRITE_SKIP_COUNT = ?, ROLLBACK_COUNT = ?, LAST_UPDATED = ? where STEP_EXECUTION_ID = ? and VERSION = ?]
+17:05:13.642 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:13.642 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+17:05:13.642 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT VERSION FROM BATCH_JOB_EXECUTION WHERE JOB_EXECUTION_ID=?]
+17:05:13.642 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+17:05:13.642 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Initiating transaction commit
+17:05:13.642 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Committing resourceless transaction on [org.springframework.batch.support.transaction.ResourcelessTransactionManager$ResourcelessTransaction@4763c727]
+17:05:13.642 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=10
+17:05:13.642 [main] DEBUG o.s.b.c.s.c.StepContextRepeatCallback - Preparing chunk execution for StepContext: org.springframework.batch.core.scope.context.StepContext@14f5da2c
+17:05:13.642 [main] DEBUG o.s.b.c.s.c.StepContextRepeatCallback - Chunk execution starting: queue size=0
+17:05:13.642 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Creating new transaction with name [null]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+17:05:13.642 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Starting repeat context.
+17:05:13.642 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=1
+17:05:13.642 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=2
+17:05:13.642 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=3
+17:05:13.642 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=4
+17:05:13.642 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=5
+17:05:13.642 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=6
+17:05:13.642 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=7
+17:05:13.642 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=8
+17:05:13.642 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=9
+17:05:13.642 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=10
+17:05:13.642 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat is complete according to policy and result value.
+17:05:13.642 [main] DEBUG o.s.b.item.file.FlatFileItemWriter - Writing to flat file with 10 items.
+17:05:13.642 [main] DEBUG o.s.b.c.s.item.ChunkOrientedTasklet - Inputs not busy, ended: false
+17:05:13.642 [main] DEBUG o.s.b.core.step.tasklet.TaskletStep - Applying contribution: [StepContribution: read=10, written=10, filtered=0, readSkips=0, writeSkips=0, processSkips=0, exitStatus=EXECUTING]
+17:05:13.642 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Participating in existing transaction
+17:05:13.642 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:13.642 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_STEP_EXECUTION_CONTEXT SET SHORT_CONTEXT = ?, SERIALIZED_CONTEXT = ? WHERE STEP_EXECUTION_ID = ?]
+17:05:13.642 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+17:05:13.642 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:oracle:thin:@//localhost:1521/ORCL]
+17:05:13.705 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+17:05:13.705 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:13.705 [main] DEBUG o.s.b.core.step.tasklet.TaskletStep - Saving step execution before commit: StepExecution: id=0, version=10, name=step1, status=STARTED, exitStatus=EXECUTING, readCount=100, filterCount=0, writeCount=100 readSkipCount=0, writeSkipCount=0, processSkipCount=0, commitCount=10, rollbackCount=0, exitDescription=
+17:05:13.705 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Participating in existing transaction
+17:05:13.705 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:13.705 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_STEP_EXECUTION set START_TIME = ?, END_TIME = ?, STATUS = ?, COMMIT_COUNT = ?, READ_COUNT = ?, FILTER_COUNT = ?, WRITE_COUNT = ?, EXIT_CODE = ?, EXIT_MESSAGE = ?, VERSION = ?, READ_SKIP_COUNT = ?, PROCESS_SKIP_COUNT = ?, WRITE_SKIP_COUNT = ?, ROLLBACK_COUNT = ?, LAST_UPDATED = ? where STEP_EXECUTION_ID = ? and VERSION = ?]
+17:05:13.721 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:13.721 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+17:05:13.721 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT VERSION FROM BATCH_JOB_EXECUTION WHERE JOB_EXECUTION_ID=?]
+17:05:13.723 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+17:05:13.724 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Initiating transaction commit
+17:05:13.724 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Committing resourceless transaction on [org.springframework.batch.support.transaction.ResourcelessTransactionManager$ResourcelessTransaction@9ed238c]
+17:05:13.725 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=11
+17:05:13.725 [main] DEBUG o.s.b.c.s.c.StepContextRepeatCallback - Preparing chunk execution for StepContext: org.springframework.batch.core.scope.context.StepContext@14f5da2c
+17:05:13.725 [main] DEBUG o.s.b.c.s.c.StepContextRepeatCallback - Chunk execution starting: queue size=0
+17:05:13.725 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Creating new transaction with name [null]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+17:05:13.725 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Starting repeat context.
+17:05:13.725 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=1
+17:05:13.726 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=2
+17:05:13.726 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=3
+17:05:13.726 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=4
+17:05:13.726 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=5
+17:05:13.726 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=6
+17:05:13.727 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=7
+17:05:13.727 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat operation about to start at count=8
+17:05:13.727 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat is complete according to policy and result value.
+17:05:13.727 [main] DEBUG o.s.b.item.file.FlatFileItemWriter - Writing to flat file with 7 items.
+17:05:13.727 [main] DEBUG o.s.b.c.s.item.ChunkOrientedTasklet - Inputs not busy, ended: true
+17:05:13.727 [main] DEBUG o.s.b.core.step.tasklet.TaskletStep - Applying contribution: [StepContribution: read=7, written=7, filtered=0, readSkips=0, writeSkips=0, processSkips=0, exitStatus=EXECUTING]
+17:05:13.727 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Participating in existing transaction
+17:05:13.727 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:13.727 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_STEP_EXECUTION_CONTEXT SET SHORT_CONTEXT = ?, SERIALIZED_CONTEXT = ? WHERE STEP_EXECUTION_ID = ?]
+17:05:13.727 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+17:05:13.727 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:oracle:thin:@//localhost:1521/ORCL]
+17:05:13.789 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+17:05:13.789 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:13.789 [main] DEBUG o.s.b.core.step.tasklet.TaskletStep - Saving step execution before commit: StepExecution: id=0, version=11, name=step1, status=STARTED, exitStatus=EXECUTING, readCount=107, filterCount=0, writeCount=107 readSkipCount=0, writeSkipCount=0, processSkipCount=0, commitCount=11, rollbackCount=0, exitDescription=
+17:05:13.789 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Participating in existing transaction
+17:05:13.789 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:13.789 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_STEP_EXECUTION set START_TIME = ?, END_TIME = ?, STATUS = ?, COMMIT_COUNT = ?, READ_COUNT = ?, FILTER_COUNT = ?, WRITE_COUNT = ?, EXIT_CODE = ?, EXIT_MESSAGE = ?, VERSION = ?, READ_SKIP_COUNT = ?, PROCESS_SKIP_COUNT = ?, WRITE_SKIP_COUNT = ?, ROLLBACK_COUNT = ?, LAST_UPDATED = ? where STEP_EXECUTION_ID = ? and VERSION = ?]
+17:05:13.805 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:13.805 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+17:05:13.805 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT VERSION FROM BATCH_JOB_EXECUTION WHERE JOB_EXECUTION_ID=?]
+17:05:13.805 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+17:05:13.805 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Initiating transaction commit
+17:05:13.805 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Committing resourceless transaction on [org.springframework.batch.support.transaction.ResourcelessTransactionManager$ResourcelessTransaction@2dbf4cbd]
+17:05:13.805 [main] DEBUG o.s.b.repeat.support.RepeatTemplate - Repeat is complete according to policy and result value.
+17:05:13.805 [main] DEBUG o.s.batch.core.step.AbstractStep - Step execution success: id=0
+17:05:13.805 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Creating new transaction with name [org.springframework.batch.core.repository.support.SimpleJobRepository.updateExecutionContext]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+17:05:13.805 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:13.805 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_STEP_EXECUTION_CONTEXT SET SHORT_CONTEXT = ?, SERIALIZED_CONTEXT = ? WHERE STEP_EXECUTION_ID = ?]
+17:05:13.805 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+17:05:13.805 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:oracle:thin:@//localhost:1521/ORCL]
+17:05:13.874 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+17:05:13.874 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:13.874 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+17:05:13.874 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Initiating transaction commit
+17:05:13.874 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Committing resourceless transaction on [org.springframework.batch.support.transaction.ResourcelessTransactionManager$ResourcelessTransaction@2692b61e]
+17:05:13.874 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Creating new transaction with name [org.springframework.batch.core.repository.support.SimpleJobRepository.update]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+17:05:13.874 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:13.874 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_STEP_EXECUTION set START_TIME = ?, END_TIME = ?, STATUS = ?, COMMIT_COUNT = ?, READ_COUNT = ?, FILTER_COUNT = ?, WRITE_COUNT = ?, EXIT_CODE = ?, EXIT_MESSAGE = ?, VERSION = ?, READ_SKIP_COUNT = ?, PROCESS_SKIP_COUNT = ?, WRITE_SKIP_COUNT = ?, ROLLBACK_COUNT = ?, LAST_UPDATED = ? where STEP_EXECUTION_ID = ? and VERSION = ?]
+17:05:13.874 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+17:05:13.874 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:oracle:thin:@//localhost:1521/ORCL]
+17:05:13.942 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+17:05:13.942 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:13.942 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+17:05:13.942 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT VERSION FROM BATCH_JOB_EXECUTION WHERE JOB_EXECUTION_ID=?]
+17:05:13.942 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+17:05:13.942 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Initiating transaction commit
+17:05:13.942 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Committing resourceless transaction on [org.springframework.batch.support.transaction.ResourcelessTransactionManager$ResourcelessTransaction@74cadd41]
+17:05:13.942 [main] DEBUG o.s.batch.core.step.AbstractStep - Step execution complete: StepExecution: id=0, version=13, name=step1, status=COMPLETED, exitStatus=COMPLETED, readCount=107, filterCount=0, writeCount=107 readSkipCount=0, writeSkipCount=0, processSkipCount=0, commitCount=11, rollbackCount=0
+17:05:13.942 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Creating new transaction with name [org.springframework.batch.core.repository.support.SimpleJobRepository.updateExecutionContext]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+17:05:13.942 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:13.942 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_JOB_EXECUTION_CONTEXT SET SHORT_CONTEXT = ?, SERIALIZED_CONTEXT = ? WHERE JOB_EXECUTION_ID = ?]
+17:05:13.942 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+17:05:13.942 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:oracle:thin:@//localhost:1521/ORCL]
+17:05:14.027 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+17:05:14.027 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:14.027 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+17:05:14.027 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Initiating transaction commit
+17:05:14.027 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Committing resourceless transaction on [org.springframework.batch.support.transaction.ResourcelessTransactionManager$ResourcelessTransaction@65a4798f]
+17:05:14.027 [main] DEBUG o.s.b.c.job.flow.support.SimpleFlow - Completed state=employeesGenerateFeedJob.step1 with status=COMPLETED
+17:05:14.027 [main] DEBUG o.s.b.c.job.flow.support.SimpleFlow - Handling state=employeesGenerateFeedJob.end1
+17:05:14.027 [main] DEBUG o.s.b.c.job.flow.support.SimpleFlow - Completed state=employeesGenerateFeedJob.end1 with status=COMPLETED
+17:05:14.027 [main] DEBUG o.s.batch.core.job.AbstractJob - Job execution complete: JobExecution: id=0, version=1, startTime=Mon Apr 02 17:05:11 CEST 2018, endTime=null, lastUpdated=Mon Apr 02 17:05:11 CEST 2018, status=COMPLETED, exitStatus=exitCode=COMPLETED;exitDescription=, job=[JobInstance: id=0, version=0, Job=[employeesGenerateFeedJob]], jobParameters=[{}]
+17:05:14.027 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Creating new transaction with name [org.springframework.batch.core.repository.support.SimpleJobRepository.update]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+17:05:14.027 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+17:05:14.027 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT COUNT(*) FROM BATCH_JOB_EXECUTION WHERE JOB_EXECUTION_ID = ?]
+17:05:14.027 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+17:05:14.027 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:oracle:thin:@//localhost:1521/ORCL]
+17:05:14.123 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+17:05:14.124 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL update
+17:05:14.125 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE BATCH_JOB_EXECUTION set START_TIME = ?, END_TIME = ?,  STATUS = ?, EXIT_CODE = ?, EXIT_MESSAGE = ?, VERSION = ?, CREATE_TIME = ?, LAST_UPDATED = ? where JOB_EXECUTION_ID = ? and VERSION = ?]
+17:05:14.127 [main] DEBUG o.s.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+17:05:14.127 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+17:05:14.127 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Initiating transaction commit
+17:05:14.127 [main] DEBUG o.s.b.s.t.ResourcelessTransactionManager - Committing resourceless transaction on [org.springframework.batch.support.transaction.ResourcelessTransactionManager$ResourcelessTransaction@773cbf4f]
+17:05:14.127 [main] INFO  o.s.b.c.l.support.SimpleJobLauncher - Job: [FlowJob: [name=employeesGenerateFeedJob]] completed with the following parameters: [{}] and the following status: [COMPLETED]
+Exit Status : COMPLETED

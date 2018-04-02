@@ -9,7 +9,6 @@ public class TestMessageChannelStdIn {
 	public void test() {
 		ClassPathXmlApplicationContext 	context = new	ClassPathXmlApplicationContext(	"context_eai_test.xml");
 		while(true) {
-			
 		}
 	}
 

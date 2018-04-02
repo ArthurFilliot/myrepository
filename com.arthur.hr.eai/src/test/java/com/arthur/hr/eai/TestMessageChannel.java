@@ -25,6 +25,8 @@ public class TestMessageChannel {
 		channel.send(message4);
 		channel.send(message5);
 		channel.send(message6);
+		
+		context.close();
 	}
 
 }
