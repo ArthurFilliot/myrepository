@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:int-stream="http://www.springframework.org/schema/integration/stream"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/integration 
+	http://www.springframework.org/schema/integration/spring-integration.xsd
+	http://www.springframework.org/schema/integration/stream 
+	http://www.springframework.org/schema/integration/stream/spring-integration-stream.xsd">
+	
+	<import resource="./context_front_jobs_services.xml" />
+	
+	<!-- a direct channel without the queue, a pollable channel with the queue --> 
+	<int:channel id="employeeFeedChannel" />
+	
+	<!-- message producer / a Spring Integration wrapped Java Standard input stream -->
+	<int-stream:stdin-channel-adapter id="producer"	channel="employeeFeedChannel">
+		<int:poller id="stdInPoller" max-messages-per-poll="5" fixed-rate="200" />
+	</int-stream:stdin-channel-adapter>
+	
+	<!-- a pair of message consumers / a pair of Spring Integration wrapped	Java Standard output streams -->
+	<int:service-activator input-channel="employeeFeedChannel" ref="employeesFeedService" method="generateFeed" />
+		
+	
+</beans>

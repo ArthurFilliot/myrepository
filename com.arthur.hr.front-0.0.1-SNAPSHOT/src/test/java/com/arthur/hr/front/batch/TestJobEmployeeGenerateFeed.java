@@ -16,7 +16,7 @@ public class TestJobEmployeeGenerateFeed {
 
 	@Test
 	public void test() throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException {
-		 String[] springConfig  =  { "context_jobs.xml" };  
+		 String[] springConfig  =  { "context_front_jobs_services.xml" };  
 	      
 	      // Creating the application context object  
 	      ApplicationContext context = new ClassPathXmlApplicationContext(springConfig);

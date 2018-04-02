@@ -10,7 +10,7 @@ public class TestEmployeesFeedService {
 
 	@Test
 	public void test() {
-		  String[] springConfig  =  { "context_services_jobs.xml" };  
+		  String[] springConfig  =  { "context_front_jobs_services.xml" };  
 	      
 	      // Creating the application context object  
 	      ApplicationContext context = new ClassPathXmlApplicationContext(springConfig);

@@ -8,7 +8,7 @@ public class TestContext {
 
 	@Test
 	public void test() {
-		 String[] springConfig  =  { "context.xml" };  
+		 String[] springConfig  =  { "context_front.xml" };  
 	      
 	      // Creating the application context object  
 	      ApplicationContext context = new ClassPathXmlApplicationContext(springConfig);
