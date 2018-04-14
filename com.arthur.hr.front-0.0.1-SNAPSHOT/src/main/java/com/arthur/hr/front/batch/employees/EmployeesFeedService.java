@@ -31,13 +31,24 @@ public class EmployeesFeedService {
 	}
 
 	public void generateFeed() {
-		try {
-			JobExecution execution = launcher.run(job, new JobParameters());
-		      System.out.println("Exit Status : " + execution.getStatus()); 
-		} catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException
-				| JobParametersInvalidException e) {
-			e.printStackTrace();
-		} 
+			JobExecution execution;
+			try {
+				execution = launcher.run(job, new JobParameters());
+				  System.out.println("Exit Status : " + execution.getStatus()); 
+			} catch (JobExecutionAlreadyRunningException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JobRestartException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JobInstanceAlreadyCompleteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JobParametersInvalidException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    
 	}
 
 }

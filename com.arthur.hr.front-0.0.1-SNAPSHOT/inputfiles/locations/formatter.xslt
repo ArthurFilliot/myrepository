@@ -42,22 +42,18 @@
                                   <xsl:value-of
 										select="COLUMN[@NAME='LOCATION_ID']" />
                                 </xsl:attribute>
-									<xsl:attribute name="state_province">
+									<xsl:attribute name="stateprovince">
                                   <xsl:value-of
 										select="COLUMN[@NAME='STATE_PROVINCE']" />
                                 </xsl:attribute>
-									<xsl:attribute name="state_province">
-                                  <xsl:value-of
-										select="COLUMN[@NAME='STATE_PROVINCE']" />
-                                </xsl:attribute>
-									<xsl:attribute name="POSTAL_CODE">
+									<xsl:attribute name="postalcode">
                                   <xsl:value-of
 										select="COLUMN[@NAME='POSTAL_CODE']" />
                                 </xsl:attribute>
-									<xsl:attribute name="CITY">
+									<xsl:attribute name="city">
                                   <xsl:value-of select="COLUMN[@NAME='CITY']" />
                                 </xsl:attribute>
-									<xsl:attribute name="STREET_ADDRESS">
+									<xsl:attribute name="streetaddress">
                                   <xsl:value-of
 										select="COLUMN[@NAME='STREET_ADDRESS']" />
                                 </xsl:attribute>

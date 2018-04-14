@@ -6,9 +6,13 @@
    
       http://www.springframework.org/schema/batch/spring-batch-2.2.xsd 
       http://www.springframework.org/schema/beans 
-      http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">  
+      http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+      http://www.springframework.org/schema/util     
+      http://www.springframework.org/schema/util/spring-util-3.0.xsd ">  
    
    <import resource = "./context_front.xml" />  
+   
+   <!-- *************** Employees *************** -->
    <bean id = "employee" class = "com.arthur.hr.front.batch.employees.EmployeeDTO" scope = "prototype" /> 
    <bean id = "employeeProcessor" class = "com.arthur.hr.front.batch.employees.EmployeeDTOProcessor" />
    
@@ -38,4 +42,175 @@
          <bean class = " org.springframework.batch.item.file.transform.PassThroughLineAggregator"/> 
       </property> 
    </bean> 
+   
+   <!-- *************** Locations *************** -->
+    <bean id = "region" class = "com.arthur.hr.front.batch.locations.RegionDTO" scope = "prototype" /> 
+    <bean id = "country" class = "com.arthur.hr.front.batch.locations.CountryDTO" scope = "prototype" /> 
+    <bean id = "location" class = "com.arthur.hr.front.batch.locations.LocationDTO" scope = "prototype" /> 
+    <bean id = "locations" class = "com.arthur.hr.front.batch.locations.LocationsDTO" scope = "prototype" /> 
+    
+    <batch:job id="integrateLocationsFeed">
+    	<batch:step id = "stepRegions" next="stepCountries">
+    	<batch:tasklet>
+    		<batch:chunk reader="regionsXmlItemReader" writer="regionlItemSqlWriter"  commit-interval="2"></batch:chunk>
+    	</batch:tasklet> 
+    	</batch:step>
+    	<batch:step id = "stepCountries" next="stepLocations">
+    	<batch:tasklet>
+    		<batch:chunk reader="countriesXmlItemReader" writer="countrylItemSqlWriter"  processor="countryProcessor" commit-interval="4"></batch:chunk>
+    	</batch:tasklet> 
+    	</batch:step>
+    	<batch:step id = "stepLocations">
+    	<batch:tasklet>
+    		<batch:chunk reader="locationsXmlItemReader" writer="locationlItemSqlWriter"  processor="locationProcessor" commit-interval="1"></batch:chunk>
+    	</batch:tasklet> 
+    	</batch:step>
+    	<batch:listeners>
+	        <batch:listener ref="integrateLocationsFeedEventListener"/>
+	    </batch:listeners>
+    </batch:job>
+    <bean id="integrateLocationsFeedEventListener" class="com.arthur.hr.front.batch.locations.LocationsJobListener">
+    	<property name="countriesByRegion" ref="countriesByRegionIndex"></property>
+    	<property name="locationsByCountry" ref="locationsByCountryIndex"></property>
+    </bean>
+    
+     <bean id="countriesByRegionIndex" class="com.arthur.hr.front.batch.locations.CountryByRegionIndexBuilder"  scope="singleton"/>
+     <bean id="locationsByCountryIndex" class="com.arthur.hr.front.batch.locations.LocationByCountryIndexBuilder" scope="singleton" />
+    
+     <bean id = "regionsXmlItemReader"  class = "org.springframework.batch.item.xml.StaxEventItemReader"> 
+      <property name = "fragmentRootElementName" value = "REGION" /> 
+      <property name = "unmarshaller" ref = "regionsUnmarshaller" /> 
+      <property name="resource" value="file:inputfiles/locations/datas.xml" />
+   	</bean> 
+    <bean id = "regionsUnmarshaller" class = "org.springframework.oxm.xstream.XStreamMarshaller">
+    	<property name = "streamDriver">
+    	 	         <bean class = "com.thoughtworks.xstream.io.xml.XppDriver" /> 
+    	</property>
+      <property name = "aliases"> 
+         <util:map> 
+         	<entry key = "LOCATIONS" value = "com.arthur.hr.front.batch.locations.LocationsDTO" />            
+            <entry key = "REGION" value = "com.arthur.hr.front.batch.locations.RegionDTO" />            
+         </util:map> 
+      </property> 
+      <property name = "implicitCollections"> 
+         <util:map> 
+            <entry key = "com.arthur.hr.front.batch.locations.LocationsDTO" value = "regions" />            
+         </util:map> 
+      </property> 
+      <property name="useAttributeFor">
+      		<util:map value-type="java.lang.Class"> 
+      			<entry key = "id" value="java.lang.Integer" />            
+      			<entry key = "name" value = "java.lang.String" />
+      		</util:map>
+      </property>
+   </bean>
+   <bean id = "regionlItemSqlWriter" class = "org.springframework.batch.item.database.JdbcBatchItemWriter"> 
+      <property name = "dataSource" ref = "dataSource" /> 
+      <property name = "sql"> 
+         <value> 
+            <![CDATA[insert into regions VALUES (:id, :name)]]>
+         </value> 
+      </property>   
+      <property name = "itemSqlParameterSourceProvider"> 
+         <bean class = "org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider" /> 
+      </property> 
+   </bean> 
+   
+   <bean id = "countriesXmlItemReader"  class = "org.springframework.batch.item.xml.StaxEventItemReader"> 
+      <property name = "fragmentRootElementName" value = "COUNTRY" /> 
+      <property name = "unmarshaller" ref = "countriesUnmarshaller" /> 
+      <property name="resource" value="file:inputfiles/locations/datas.xml" />
+   	</bean> 
+   <bean id = "countriesUnmarshaller" class = "org.springframework.oxm.xstream.XStreamMarshaller">
+    	<property name = "streamDriver">
+    	 	         <bean class = "com.thoughtworks.xstream.io.xml.XppDriver" /> 
+    	</property>
+      <property name = "aliases"> 
+         <util:map> 
+         	<entry key = "LOCATIONS" value = "com.arthur.hr.front.batch.locations.LocationsDTO" /> 
+         	<entry key = "REGION" value = "com.arthur.hr.front.batch.locations.RegionDTO" />         
+            <entry key = "COUNTRY" value = "com.arthur.hr.front.batch.locations.CountryDTO" />            
+         </util:map> 
+      </property> 
+      <property name = "implicitCollections"> 
+         <util:map> 
+            <entry key = "com.arthur.hr.front.batch.locations.LocationsDTO" value = "regions" />
+            <entry key = "com.arthur.hr.front.batch.locations.RegionDTO" value = "countries" />            
+         </util:map> 
+      </property> 
+      <property name="useAttributeFor">
+      		<util:map value-type="java.lang.Class"> 
+      			<entry key = "id" value="java.lang.String" />            
+      			<entry key = "name" value = "java.lang.String" />
+      		</util:map>
+      </property>
+   </bean> 
+   <bean id = "countrylItemSqlWriter" class = "org.springframework.batch.item.database.JdbcBatchItemWriter"> 
+      <property name = "dataSource" ref = "dataSource" /> 
+      <property name = "sql"> 
+         <value> 
+            <![CDATA[insert INTO countries VALUES (:id,:name,:regionId)]]>
+         </value> 
+      </property>   
+      <property name = "itemSqlParameterSourceProvider"> 
+         <bean class = "org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider" /> 
+      </property> 
+   </bean> 
+   <bean id = "countryProcessor" class = "com.arthur.hr.front.batch.locations.CountryDTOProcessor">
+   		<property name="countriesByRegion" ref="countriesByRegionIndex"></property>
+   </bean> 
+   
+   <bean id = "locationsXmlItemReader"  class = "org.springframework.batch.item.xml.StaxEventItemReader"> 
+      <property name = "fragmentRootElementName" value = "LOCATION" /> 
+      <property name = "unmarshaller" ref = "locationsUnmarshaller" /> 
+      <property name="resource" value="file:inputfiles/locations/datas.xml" />
+   	</bean> 
+   <bean id = "locationsUnmarshaller" class = "org.springframework.oxm.xstream.XStreamMarshaller">
+    	<property name = "streamDriver">
+    	 	         <bean class = "com.thoughtworks.xstream.io.xml.XppDriver" /> 
+    	</property>
+      <property name = "aliases"> 
+         <util:map> 
+         	<entry key = "LOCATIONS" value = "com.arthur.hr.front.batch.locations.LocationsDTO" /> 
+         	<entry key = "REGION" value = "com.arthur.hr.front.batch.locations.RegionDTO" />         
+            <entry key = "COUNTRY" value = "com.arthur.hr.front.batch.locations.CountryDTO" />
+            <entry key = "LOCATION" value = "com.arthur.hr.front.batch.locations.LocationDTO" />            
+         </util:map> 
+      </property> 
+      <property name = "implicitCollections"> 
+         <util:map> 
+            <entry key = "com.arthur.hr.front.batch.locations.LocationsDTO" value = "regions" />
+            <entry key = "com.arthur.hr.front.batch.locations.RegionDTO" value = "countries" />
+            <entry key = "com.arthur.hr.front.batch.locations.CountryDTO" value = "locations" />            
+         </util:map> 
+      </property> 
+      <property name="useAttributeFor">
+      		<util:map key-type="java.lang.Class">
+      			<entry key = "com.arthur.hr.front.batch.locations.LocationDTO" >
+      					<util:list value-type="java.lang.String">
+      						<value>id</value>
+      						<value>city</value>
+      						<value>stateprovince</value>
+      						<value>postalcode</value>
+      						<value>streetaddress</value>
+      					</util:list>
+      			</entry>
+      		</util:map>
+      </property>
+   </bean> 
+   <bean id = "locationlItemSqlWriter" class = "org.springframework.batch.item.database.JdbcBatchItemWriter"> 
+      <property name = "dataSource" ref = "dataSource" /> 
+      <property name = "sql"> 
+         <value> 
+            <![CDATA[insert INTO locations VALUES (:id,:streetaddress,:postalcode,:city,:stateprovince,:countryId)]]>
+         </value> 
+      </property>   
+      <property name = "itemSqlParameterSourceProvider"> 
+         <bean class = "org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider" /> 
+      </property> 
+   </bean> 
+   <bean id = "locationProcessor" class = "com.arthur.hr.front.batch.locations.LocationDTOProcessor">
+   		<property name="locationsByCountry" ref="locationsByCountryIndex"></property>
+   </bean>
+   
 </beans> 

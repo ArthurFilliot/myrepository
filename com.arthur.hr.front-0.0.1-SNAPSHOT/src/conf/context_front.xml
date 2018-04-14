@@ -6,6 +6,9 @@
       http://www.springframework.org/schema/jdbc 
       http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd "> 
    
+   <!-- Global Bean Post Processor -->
+   <bean id="postProcessor" class="com.arthur.hr.front.batch.MyBeanPostProcessor" />
+   
    <!-- stored job-meta in database --> 
    <bean id = "jobRepository"  
       class = "org.springframework.batch.core.repository.support.JobRepositoryFactoryBean"> 

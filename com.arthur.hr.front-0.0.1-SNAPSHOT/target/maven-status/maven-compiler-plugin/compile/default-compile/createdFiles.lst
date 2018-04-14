@@ -1,0 +1,17 @@
+com\arthur\hr\front\batch\AbstractWriterRecord.class
+com\arthur\hr\front\batch\SampleBatchApplication$1.class
+com\arthur\hr\front\batch\AbstractNodeList.class
+com\arthur\hr\front\batch\employees\EmployeeDTO.class
+com\arthur\hr\front\batch\locations\LocationsDTO.class
+com\arthur\hr\front\batch\AbstractItemProcessor.class
+com\arthur\hr\front\batch\employees\EmployeesFeedService.class
+com\arthur\hr\front\batch\CustomXStreamMarshaller.class
+com\arthur\hr\front\batch\locations\LocationDTO.class
+com\arthur\hr\front\batch\CustomXStreamMarshaller$1.class
+com\arthur\hr\front\batch\SampleBatchApplication.class
+com\arthur\hr\front\batch\MyBeanPostProcessor.class
+com\arthur\hr\front\batch\employees\EmployeeDTOMapper.class
+com\arthur\hr\front\batch\employees\EmployeeDTOCSVRecord.class
+com\arthur\hr\front\batch\locations\CountryDTO.class
+com\arthur\hr\front\batch\employees\EmployeeDTOProcessor.class
+com\arthur\hr\front\batch\locations\RegionDTO.class
